@@ -34,7 +34,39 @@
     </header>
 
     <div>    
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid quod ratione omnis vitae, quam mollitia non ipsum, quasi esse architecto odio. Natus et ipsam maxime voluptate sint laborum doloremque odio.</p>
+      <?php
+      $json = "https://api.lunayazilim.com/standings.json";
+      $json = file_get_contents($json);
+      $json = json_decode($json, true);
+      
+      echo "<table>";
+      echo "<tr>";
+      echo "<th>Takım</th>";
+      echo "<th>O</th>";
+      echo "<th>G</th>";
+      echo "<th>B</th>";
+      echo "<th>M</th>";
+      echo "<th>A</th>";
+      echo "<th>Y</th>";
+      echo "<th>Av</th>";
+      echo "<th>P</th>";
+      echo "</tr>";
+      
+      for ( $i = 0; $i < count($json); $i++ ) {
+      echo "<tr>";
+      echo "<td>". ($i + 1). '. ' . $json[$i]['team']."</td>";
+      echo "<td>". $json[$i]['games']."</td>";
+      echo "<td>". $json[$i]['wins']."</td>";
+      echo "<td>". $json[$i]['draws']."</td>";
+      echo "<td>". $json[$i]['losses']."</td>";
+      echo "<td>". $json[$i]['goals_for']."</td>";
+      echo "<td>". $json[$i]['goals_against']."</td>";
+      echo "<td>". $json[$i]['goal_difference']."</td>";
+      echo "<td style='font-weight: bold;'>". $json[$i]['points_per_game']."</td>";
+      echo "</tr>";
+      }
+      echo "</table>";
+      ?>
     </div>
     
     <div class="container-fluid ">

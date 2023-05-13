@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="UTF-8">
+	<title>Login Sayfası</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style>
+		body {
+			background-color: #f2f2f2;
+		}
+		.card {
+			margin-top: 100px;
+			box-shadow: 0px 0px 10px #888888;
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="text-center">Giriş Yap</h4>
+			</div>
+			<div class="card-body">
+				<form onsubmit="return validateForm()" method="post" action="login.php">
+					<div class="form-group">
+						<label for="email">E-posta Adresi:</label>
+						<input type="email" class="form-control" id="email" name="email" required>
+					</div>
+					<div class="form-group">
+						<label for="password">Şifre:</label>
+						<input type="password" class="form-control" id="password" name="password" required>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function validateForm() {
+			var email = document.getElementById("email").value;
+			var password = document.getElementById("password").value;
+			var emailRegex = /^\w+@\w+\.\w+$/;
+			var sakaryaEmailRegex = /^\w+@sakarya\.edu\.tr$/;
+
+			if (email == "" || password == "") {
+				alert("Lütfen tüm alanları doldurun.");
+				return false;
+			}
+			if (!emailRegex.test(email)) {
+				alert("Geçersiz e-posta adresi.");
+				return false;
+			}
+			if (!sakaryaEmailRegex.test(email)) {
+				alert("E-posta adresi 'id@sakarya.edu.tr' uzantısıyla olmalıdır.");
+				return false;
+			}
+			if (email != "id@sakarya.edu.tr" || password != "sifre") {
+				alert("Hatalı kullanıcı adı veya şifre.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+</body>
+</html>
