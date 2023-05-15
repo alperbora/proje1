@@ -34,7 +34,97 @@
     </header>
 
     <div>    
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid quod ratione omnis vitae, quam mollitia non ipsum, quasi esse architecto odio. Natus et ipsam maxime voluptate sint laborum doloremque odio.</p>
+
+      <style>
+        .form-group {
+          margin-bottom: 20px;
+        }
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+        input, textarea {
+          width: 100%;
+          padding: 5px;
+        }
+        .button-container {
+          margin-top: 20px;
+        }
+        .button-container button {
+          margin-right: 10px;
+        }
+        #result {
+          margin-top: 20px;
+          font-weight: bold;
+        }
+      </style>
+    </head>
+    <body>
+      <h1>İletişim Formu</h1>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">İsim:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">E-posta:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Mesaj:</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <div class="button-container">
+          <button type="button" onclick="clearForm()">Temizle</button>
+          <button type="button" onclick="submitForm()">Gönder</button>
+        </div>
+      </form>
+      <div id="result"></div>
+    
+      <script>
+        function clearForm() {
+          document.getElementById('contactForm').reset();
+        }
+    
+        function submitForm() {
+          var name = document.getElementById('name').value;
+          var email = document.getElementById('email').value;
+          var message = document.getElementById('message').value;
+    
+          if (!name || !email || !message) {
+            alert('Lütfen tüm alanları doldurun.');
+            return;
+          }
+    
+          if (!validateEmail(email)) {
+            alert('Geçerli bir e-posta adresi girin.');
+            return;
+          }
+    
+          var formData = {
+            name: name,
+            email: email,
+            message: message
+          };
+    
+          // Burada formData'yı başka bir sayfaya göndermek veya işlemek için yapmanız gereken adımları ekleyebilirsiniz.
+    
+          // Örneğin, formData'yı başka bir sayfaya göndermek için aşağıdaki kodu kullanabilirsiniz:
+          // var encodedData = encodeURIComponent(JSON.stringify(formData));
+          // window.location.href = 'sonuc.html?data=' + encodedData;
+    
+          // Aşağıdaki kod, formData'yı bu sayfada görüntüler:
+          document.getElementById('result').innerHTML = 'Gönderilen Bilgiler:<br>' +
+            'İsim: ' + formData.name + '<br>' +
+            'E-posta: ' + formData.email + '<br>' +
+            'Mesaj: ' + formData.message;
+        }
+    
+        function validateEmail(email) {
+          var re = /\S+@\S+\.\S+/;
+          return re.test(email);
+        }
+      </script>
     </div>
     
     <div class="container-fluid ">
