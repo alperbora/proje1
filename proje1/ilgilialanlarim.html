@@ -18,7 +18,7 @@
         </button>
         <div class="navbar-brand collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link " href="home.html">Ana Sayfa</a>
+            <a class="nav-link" href="home.html">Ana Sayfa</a>
             <a class="nav-link" href="sehrim.html">Şehrim</a>
             <a class="nav-link" href="takimimiz.html">Takımımız</a>
             <a class="nav-link" href="#">İlgi Alanları</a>
@@ -29,44 +29,17 @@
       </div>
     </nav>
     
-    <header class="container-fluid">
+    <header class="container-fluid nav justify-content-center">
       <h1>İLGİ ALANLARIM</h1>
     </header>
 
-    <div>    
-      <?php
-      $json = "https://api.lunayazilim.com/standings.json";
-      $json = file_get_contents($json);
-      $json = json_decode($json, true);
+    <div class="container-fluid nav justify-content-center">    
+      <section>
+      <p>Gösterilecek Puan Durumu Yılı</p>
+      <input type="text" placeholder="yıl">
+      <button type="submit" class="btn btn-secondary " id="resetButton">ara</button>
+      </section>
       
-      echo "<table>";
-      echo "<tr>";
-      echo "<th>Takım</th>";
-      echo "<th>O</th>";
-      echo "<th>G</th>";
-      echo "<th>B</th>";
-      echo "<th>M</th>";
-      echo "<th>A</th>";
-      echo "<th>Y</th>";
-      echo "<th>Av</th>";
-      echo "<th>P</th>";
-      echo "</tr>";
-      
-      for ( $i = 0; $i < count($json); $i++ ) {
-      echo "<tr>";
-      echo "<td>". ($i + 1). '. ' . $json[$i]['team']."</td>";
-      echo "<td>". $json[$i]['games']."</td>";
-      echo "<td>". $json[$i]['wins']."</td>";
-      echo "<td>". $json[$i]['draws']."</td>";
-      echo "<td>". $json[$i]['losses']."</td>";
-      echo "<td>". $json[$i]['goals_for']."</td>";
-      echo "<td>". $json[$i]['goals_against']."</td>";
-      echo "<td>". $json[$i]['goal_difference']."</td>";
-      echo "<td style='font-weight: bold;'>". $json[$i]['points_per_game']."</td>";
-      echo "</tr>";
-      }
-      echo "</table>";
-      ?>
     </div>
     
     <div class="container-fluid ">
@@ -83,8 +56,6 @@
       </footer>
     </div>
     
-   
-      
     <script src="js/bootstrap.min.js"></script>
   </body>
 

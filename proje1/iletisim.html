@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/style.css">
-      <title>İletişim</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>İletişim</title>
   </head>
-  <body  class="arkaplan beyazyazi"> 
 
+  <body  class="arkaplan beyazyazi"> 
     <nav class="navbar navbar-expand-lg navbar-dark border-bottom">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Proje 1</a>
@@ -29,119 +30,102 @@
       </div>
     </nav>
     
-    <header class="container-fluid">
-      <h1>İLETİŞİM</h1>
+    <header class="container-fluid nav justify-content-center buyukyazi">
+      <h1><br> İLETİŞİM FORMU</h1>
     </header>
+      <div class="container">
+        <div class="form-container">
+          
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name">Ad:</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">E-posta:</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Mesaj:</label>
+              <textarea class="form-control" id="message" required></textarea>
+            </div>
+            <br>
 
-    <div>    
-
-      <style>
-        .form-group {
-          margin-bottom: 20px;
-        }
-        label {
-          display: block;
-          margin-bottom: 5px;
-        }
-        input, textarea {
-          width: 100%;
-          padding: 5px;
-        }
-        .button-container {
-          margin-top: 20px;
-        }
-        .button-container button {
-          margin-right: 10px;
-        }
-        #result {
-          margin-top: 20px;
-          font-weight: bold;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>İletişim Formu</h1>
-      <form id="contactForm">
-        <div class="form-group">
-          <label for="name">İsim:</label>
-          <input type="text" id="name" name="name" required>
+            <button type="button" class="btn btn-primary" id="jsSubmitButton">Gönder (JavaScript)</button>
+            <button type="button" class="btn btn-primary" id="jquerySubmitButton">Gönder (jQuery)</button>
+            <button type="button" class="btn btn-secondary" id="resetButton">Temizle</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="email">E-posta:</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Mesaj:</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-        </div>
-        <div class="button-container">
-          <button type="button" onclick="clearForm()">Temizle</button>
-          <button type="button" onclick="submitForm()">Gönder</button>
-        </div>
-      </form>
-      <div id="result"></div>
+      </div>
     
+      
       <script>
-        function clearForm() {
-          document.getElementById('contactForm').reset();
-        }
-    
-        function submitForm() {
+        // JavaScript ile formun gönderilmesi
+        document.getElementById('jsSubmitButton').addEventListener('click', function() {
           var name = document.getElementById('name').value;
           var email = document.getElementById('email').value;
           var message = document.getElementById('message').value;
     
-          if (!name || !email || !message) {
-            alert('Lütfen tüm alanları doldurun.');
+          if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
+            alert('Lütfen tüm alanları doldurun');
             return;
           }
     
           if (!validateEmail(email)) {
-            alert('Geçerli bir e-posta adresi girin.');
+            alert('Lütfen geçerli bir e-posta adresi girin');
             return;
           }
     
-          var formData = {
-            name: name,
-            email: email,
-            message: message
-          };
+          alert('Form başarıyla gönderildi');
+          document.getElementById('contact-form').reset();
+        });
     
-          // Burada formData'yı başka bir sayfaya göndermek veya işlemek için yapmanız gereken adımları ekleyebilirsiniz.
+        // jQuery ile formun gönderilmesi
+        $('#jquerySubmitButton').click(function() {
+          var name = $('#name').val();
+          var email = $('#email').val();
+          var message = $('#message').val();
     
-          // Örneğin, formData'yı başka bir sayfaya göndermek için aşağıdaki kodu kullanabilirsiniz:
-          // var encodedData = encodeURIComponent(JSON.stringify(formData));
-          // window.location.href = 'sonuc.html?data=' + encodedData;
+          if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
+            alert('Lütfen tüm alanları doldurun');
+            return;
+          }
     
-          // Aşağıdaki kod, formData'yı bu sayfada görüntüler:
-          document.getElementById('result').innerHTML = 'Gönderilen Bilgiler:<br>' +
-            'İsim: ' + formData.name + '<br>' +
-            'E-posta: ' + formData.email + '<br>' +
-            'Mesaj: ' + formData.message;
-        }
+          if (!validateEmail(email)) {
+            alert('Lütfen geçerli bir e-posta adresi girin');
+            return;
+          }
     
+          alert('Form başarıyla gönderildi');
+          $('#contact-form')[0].reset();
+        });
+    
+        // Formu sıfırlama
+        $('#resetButton').click(function() {
+          $('#contact-form')[0].reset();
+        });
+    
+        // E-posta doğrulama fonksiyonu
         function validateEmail(email) {
-          var re = /\S+@\S+\.\S+/;
-          return re.test(email);
+          var emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+          return emailRegex.test(email);
         }
       </script>
-    </div>
-    
-    <div class="container-fluid ">
-      <footer class="py-3 my-4">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="home.html" class="nav-link px-2 text-white">Ana Sayfa</a></li>
-          <li class="nav-item"><a href="sehrim.html" class="nav-link px-2 text-white">Şehrim</a></li>
-          <li class="nav-item"><a href="takimimiz.html" class="nav-link px-2 text-white">Takımımız</a></li>
-          <li class="nav-item"><a href="ilgilialanlarim.html" class="nav-link px-2 text-white">İlgi Alanlarım</a></li>
-          <li class="nav-item"><a href="ozgecmis.html" class="nav-link px-2 text-white">Özgeçmiş</a></li>
-          <li class="nav-item"><a href="#" class="nav-link px-2 text-white">İletişim</a></li>
-        </ul>
-        <p class="text-center text-white">© 2023 Alper BORA</p>
-      </footer>
-    </div>
-    
-   
+
+
+<div class="container-fluid ">
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="home.html" class="nav-link px-2 text-white">Ana Sayfa</a></li>
+      <li class="nav-item"><a href="sehrim.html" class="nav-link px-2 text-white">Şehrim</a></li>
+      <li class="nav-item"><a href="takimimiz.html" class="nav-link px-2 text-white">Takımımız</a></li>
+      <li class="nav-item"><a href="ilgilialanlarim.html" class="nav-link px-2 text-white">İlgi Alanlarım</a></li>
+      <li class="nav-item"><a href="ozgecmis.html" class="nav-link px-2 text-white">Özgeçmiş</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-white">İletişim</a></li>
+    </ul>
+    <p class="text-center text-white">© 2023 Alper BORA</p>
+  </footer>
+</div>
       
     <script src="js/bootstrap.min.js"></script>
   </body>
