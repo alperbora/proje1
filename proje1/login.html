@@ -1,33 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/style.css">
-      <title>Login</title>
-  </head>
-  <body > 
 
-    <div class="login-form">
-        <form action="home.html">
-            <h2 class="text-center">Log in</h2>       
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Username" required="required">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" required="required">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Log in</button>
-            </div>       
-        </form>
-    </div>
-    
-   
-      
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<title>Login Sayfası</title>
+</head>
+
+<body class="arkaplan">
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="text-center">Giriş Yap</h4>
+			</div>
+			<div class="card-body">
+				<form onsubmit="return validateForm()" method="post" action="home.html">
+					<div class="form-group">
+						<label for="email">E-posta Adresi:</label>
+						<input type="email" class="form-control" id="email" name="email" required>
+					</div>
+					<div class="form-group">
+						<label for="password"><br> Şifre:</label>
+						<input type="password" class="form-control" id="password" name="password" required> <br>
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function validateForm() {
+			var email = document.getElementById("email").value;
+			var password = document.getElementById("password").value;
+			var emailRegex = /^\w+@\w+\.\w+$/;
+			var sakaryaEmailRegex = /^\w+@sakarya\.edu\.tr$/;
+
+			if (email == "" || password == "") {
+				alert("Lütfen tüm alanları doldurun.");
+				return false;
+			}
+			if (!sakaryaEmailRegex.test(email)) {
+				alert("E-posta adresi '@sakarya.edu.tr' uzantısıyla olmalıdır.");
+				return false;
+			}
+			if (email != "b221210307@sakarya.edu.tr" || password != "b221210307") {
+				alert("Hatalı kullanıcı adı veya şifre.");
+				return false;
+			}
+			return;
+		}
+	</script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
 
 </html>
